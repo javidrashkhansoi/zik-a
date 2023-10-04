@@ -31,37 +31,31 @@ html {
 
 nav,
 footer,
-header,
-aside {
+header {
   display: block;
 }
 
 input,
-textarea,
 button {
   font-family: inherit;
   color: inherit;
 }
 
-input,
-textarea {
+input {
   caret-color: currentColor;
 }
 
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
+input::-webkit-input-placeholder {
   color: inherit;
   opacity: 1;
 }
 
-input::-moz-placeholder,
-textarea::-moz-placeholder {
+input::-moz-placeholder {
   color: inherit;
   opacity: 1;
 }
 
-input::placeholder,
-textarea::placeholder {
+input::placeholder {
   color: inherit;
   opacity: 1;
 }
@@ -114,16 +108,9 @@ img {
 
 h1,
 h2,
-h3,
-h4,
-h5,
-h6 {
+h3 {
   font-size: inherit;
   font-weight: 400;
-}
-
-address {
-  font-style: normal;
 }
 
 svg {
@@ -271,19 +258,12 @@ body {
   overflow: hidden;
 }
 
-.no-webp .wrapper::before {
-  background-image: url("../img/images/pages/index/hero/1.png");
-}
-
-.wrapper::before {
-  content: "";
+.wrapper__background {
   position: fixed;
   inset-block: var(--header-height) 0;
   inset-inline: 0;
   z-index: -1;
   font-size: 0;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
   opacity: 0.12;
 }
 
@@ -1025,6 +1005,10 @@ html:not(.scrolled) .up {
   background-color: #d9d9d9;
 }
 
+.offer__button {
+  --outline-color: #50a359;
+}
+
 .news {
   -webkit-padding-before: 60px;
   padding-block-start: 60px;
@@ -1085,10 +1069,6 @@ html:not(.scrolled) .up {
   color: #50a359;
   transition-property: color;
   transition-duration: 0.3s;
-}
-
-.webp .wrapper::before {
-  background-image: url(../img/images/pages/index/hero/1.webp);
 }
 
 @media (min-width: 281px) {
@@ -1688,6 +1668,25 @@ html:not(.scrolled) .up {
 
   .header-contacts__line {
     display: none;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1280px) {
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background-color: rgba(80, 163, 89, 0.5);
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+    transition-duration: 0.3s;
+  }
+
+  html:not(.burger-active) body::before {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
   }
 }
 
