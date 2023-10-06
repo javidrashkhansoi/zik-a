@@ -894,6 +894,17 @@ const burger = new Burger({
   breakpoint: 1280,
 });
 
+/** @type {HTMLButtonElement} */
+const burgerButton = document.querySelector(".burger-button");
+/** @type {HTMLButtonElement} */
+const closeButton = document.querySelector(".close-button");
+
+if (burgerButton && closeButton) {
+  closeButton.addEventListener("click", () => {
+    burgerButton.click();
+  });
+}
+
 ;// CONCATENATED MODULE: ./src/js/scripts/scripts/up.js
 /** @type {HTMLButtonElement} */
 const upButton = document.querySelector(".up");
@@ -1009,7 +1020,7 @@ const headerNav = document.querySelector(".header-nav");
 
 if (headerNav) {
   const headerContacts = document.querySelector(".header-contacts");
-  const headerForm = document.querySelector(".header-form");
+  const requestButton = document.querySelector(".request-button");
 
   if (headerContacts) {
     const move = new Move({
@@ -1019,17 +1030,40 @@ if (headerNav) {
     });
   }
 
-  if (headerForm) {
+  if (requestButton) {
     const move = new Move({
       destinationSelector: ".header-nav",
-      targetSelector: ".header-form",
-      breakpoint: 768,
-      index: "first",
+      targetSelector: ".request-button",
+      breakpoint: 992,
     });
   }
 }
 
+;// CONCATENATED MODULE: ./src/js/scripts/scripts/search.js
+/** @type {HTMLButtonElement} */
+const searchButton = document.querySelector(".search-button");
+/** @type {HTMLFormElement} */
+const searchForm = document.querySelector(".header-form");
+
+if (searchButton && searchForm) {
+  searchButton.addEventListener("click", () => {
+    searchButton.classList.toggle("active");
+    searchForm.classList.toggle("show");
+  });
+
+  document.addEventListener("click", event => {
+    /** @type {{target: HTMLElement}} */
+    const { target } = event;
+
+    if (!target.closest(".search-button") && !target.closest(".header-form")) {
+      searchButton.classList.remove("active");
+      searchForm.classList.remove("show");
+    }
+  });
+}
+
 ;// CONCATENATED MODULE: ./src/js/scripts/scripts.js
+
 
 
 
