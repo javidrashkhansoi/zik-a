@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Helvetica Neue Cyr";
+  src: url("../fonts/Helvetica_Neue_Cyr-Regular-Normal.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -120,6 +128,30 @@ svg {
   transition-duration: 0.3s;
 }
 
+dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  inline-size: 100%;
+  max-inline-size: none;
+  block-size: 100%;
+  max-block-size: none;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  color: inherit;
+  background: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  overflow: auto;
+}
+
+dialog[open] {
+  opacity: 1;
+  visibility: visible;
+}
+
 .ibg {
   position: relative;
   isolation: isolate;
@@ -207,11 +239,12 @@ svg {
 }
 
 .button {
+  --outline-color: #50a359;
   display: flex;
   justify-content: center;
   align-items: center;
   inline-size: 100%;
-  max-inline-size: 465px;
+  max-inline-size: var(--button-wmax, 465px);
   padding-block: 5px;
   padding-inline: 10px;
   margin-inline: auto;
@@ -1094,10 +1127,6 @@ html:not(.scrolled) .up {
   background-color: #d9d9d9;
 }
 
-.offer__button {
-  --outline-color: #50a359;
-}
-
 .news {
   -webkit-padding-before: 60px;
   padding-block-start: 60px;
@@ -1158,6 +1187,185 @@ html:not(.scrolled) .up {
   color: #50a359;
   transition-property: color;
   transition-duration: 0.3s;
+}
+
+.dialog__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 0 4px 40px 0 rgba(0, 0, 0, 0.15);
+  max-inline-size: 852px;
+  padding-block: 70px;
+  padding-inline: 80px;
+  border-radius: 24px;
+}
+
+.dialog__close {
+  position: absolute;
+  z-index: 1;
+  aspect-ratio: 1/1;
+  background-color: #fff;
+  inset-block-start: 60px;
+  inset-inline-end: 80px;
+  inline-size: 42px;
+}
+
+.dialog__close::before,
+.dialog__close::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  inline-size: 71.4285714286%;
+  block-size: 2px;
+  border-radius: 4px;
+  background-color: #1a1a1a;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+}
+
+.dialog__close::before {
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.dialog__close::after {
+  -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.dialog__title {
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  color: #000;
+  -webkit-margin-after: 50px;
+  margin-block-end: 50px;
+  -webkit-padding-end: 62px;
+  padding-inline-end: 62px;
+  font-size: 42px;
+}
+
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  font-family: "Helvetica Neue Cyr";
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.dialog-form__inputs {
+  -webkit-margin-after: 20px;
+  margin-block-end: 20px;
+}
+
+.dialog-form__input:not(:last-child) {
+  -webkit-margin-after: 25px;
+  margin-block-end: 25px;
+}
+
+.dialog-form__checkbox {
+  -webkit-margin-after: 50px;
+  margin-block-end: 50px;
+}
+
+.dialog-form__button {
+  --button-wmax: none;
+}
+
+.dialog-label {
+  position: relative;
+  display: block;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-size: 24px;
+}
+
+.dialog-label input {
+  inline-size: 100%;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: #000;
+  block-size: 69px;
+  padding-inline: 30px;
+}
+
+.dialog-label__text {
+  position: absolute;
+  inset-block-start: 50%;
+  color: rgba(0, 0, 0, 0.6);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  transition-property: inset-block-start, font-size, -webkit-transform;
+  transition-property: inset-block-start, font-size, transform;
+  transition-property: inset-block-start, font-size, transform, -webkit-transform;
+  transition-duration: 0.3s;
+  inset-inline-start: 30px;
+}
+
+.dialog-label__text mark {
+  color: #d72034;
+  background: none;
+}
+
+input:focus ~ .dialog-label__text {
+  inset-block-start: -14px;
+  font-size: 14px;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.dialog-checkbox {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  transition-property: color;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  -webkit-column-gap: 22px;
+  -moz-column-gap: 22px;
+  column-gap: 22px;
+  font-size: 16px;
+}
+
+.dialog-checkbox input:focus ~ .dialog-checkbox__icon {
+  background-color: #9acf9f;
+}
+
+.dialog-checkbox input:focus ~ .dialog-checkbox__text {
+  color: #9acf9f;
+}
+
+.dialog-checkbox__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
+  aspect-ratio: 1/1;
+  font-size: 0;
+  background-color: #50a359;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  inline-size: 30px;
+}
+
+input:not(:checked) ~ .dialog-checkbox__icon svg {
+  stroke: rgba(255, 255, 255, 0);
+}
+
+.dialog-checkbox__icon svg {
+  stroke: #fff;
+  inline-size: 15px;
+  block-size: 18px;
 }
 
 @media (min-width: 281px) {
@@ -1721,6 +1929,96 @@ html:not(.scrolled) .up {
   .news__title {
     --title-h2-mb: calc(40px + 20 * (100vw - 375px) / 905);
   }
+
+  .dialog__inner {
+    max-inline-size: calc(320px + 532 * (100vw - 375px) / 905);
+  }
+
+  .dialog__inner {
+    padding-block: calc(50px + 20 * (100vw - 375px) / 905);
+  }
+
+  .dialog__inner {
+    padding-inline: calc(20px + 60 * (100vw - 375px) / 905);
+  }
+
+  .dialog__inner {
+    border-radius: calc(12px + 12 * (100vw - 375px) / 905);
+  }
+
+  .dialog__close {
+    inset-block-start: calc(20px + 40 * (100vw - 375px) / 905);
+  }
+
+  .dialog__close {
+    inset-inline-end: calc(16px + 64 * (100vw - 375px) / 905);
+  }
+
+  .dialog__close {
+    inline-size: calc(34px + 8 * (100vw - 375px) / 905);
+  }
+
+  .dialog__title {
+    -webkit-margin-after: calc(20px + 30 * (100vw - 375px) / 905);
+    margin-block-end: calc(20px + 30 * (100vw - 375px) / 905);
+  }
+
+  .dialog__title {
+    -webkit-padding-end: calc(54px + 8 * (100vw - 375px) / 905);
+    padding-inline-end: calc(54px + 8 * (100vw - 375px) / 905);
+  }
+
+  .dialog__title {
+    font-size: calc(22px + 20 * (100vw - 375px) / 905);
+  }
+
+  .dialog-form__inputs {
+    -webkit-margin-after: calc(15px + 5 * (100vw - 375px) / 905);
+    margin-block-end: calc(15px + 5 * (100vw - 375px) / 905);
+  }
+
+  .dialog-form__input:not(:last-child) {
+    -webkit-margin-after: calc(15px + 10 * (100vw - 375px) / 905);
+    margin-block-end: calc(15px + 10 * (100vw - 375px) / 905);
+  }
+
+  .dialog-label {
+    font-size: calc(14px + 10 * (100vw - 375px) / 905);
+  }
+
+  .dialog-label input {
+    block-size: calc(42px + 27 * (100vw - 375px) / 905);
+  }
+
+  .dialog-label input {
+    padding-inline: calc(15px + 15 * (100vw - 375px) / 905);
+  }
+
+  .dialog-label__text {
+    inset-inline-start: calc(15px + 15 * (100vw - 375px) / 905);
+  }
+
+  .dialog-checkbox {
+    -webkit-column-gap: calc(15px + 7 * (100vw - 375px) / 905);
+    -moz-column-gap: calc(15px + 7 * (100vw - 375px) / 905);
+    column-gap: calc(15px + 7 * (100vw - 375px) / 905);
+  }
+
+  .dialog-checkbox {
+    font-size: calc(12px + 4 * (100vw - 375px) / 905);
+  }
+
+  .dialog-checkbox__icon {
+    inline-size: calc(24px + 6 * (100vw - 375px) / 905);
+  }
+
+  .dialog-checkbox__icon svg {
+    inline-size: calc(13px + 2 * (100vw - 375px) / 905);
+  }
+
+  .dialog-checkbox__icon svg {
+    block-size: calc(13px + 5 * (100vw - 375px) / 905);
+  }
 }
 
 @media (max-width: 992px) {
@@ -1757,6 +2055,7 @@ html:not(.scrolled) .up {
   }
 
   .request-button {
+    --outline-color: #50a359;
     justify-content: center;
     align-self: center;
     inline-size: 100%;
@@ -1908,6 +2207,15 @@ html:not(.scrolled) .up {
 
   .offer__line {
     block-size: 66px;
+  }
+
+  .dialog__inner {
+    flex: 1 1 auto;
+  }
+
+  .dialog-form__button {
+    -webkit-margin-before: auto;
+    margin-block-start: auto;
   }
 }
 
@@ -2067,6 +2375,19 @@ html:not(.scrolled) .up {
 
   .news-card__link:hover {
     color: rgba(0, 0, 0, 0.7);
+  }
+
+  .dialog__close:hover::before,
+  .dialog__close:hover::after {
+    background-color: #9acf9f;
+  }
+
+  .dialog-checkbox:hover {
+    color: #9acf9f;
+  }
+
+  .dialog-checkbox:hover .dialog-checkbox__icon {
+    background-color: #9acf9f;
   }
 }
 
