@@ -2210,7 +2210,7 @@ input:not(:checked) ~ .dialog-checkbox__icon svg {
   }
 
   .dialog__inner {
-    min-block-size: 420px;
+    flex: 0 1 420px;
   }
 
   .dialog-form__button {
