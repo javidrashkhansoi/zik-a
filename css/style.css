@@ -1298,6 +1298,18 @@ html:not(.scrolled) .up {
   padding-inline: 30px;
 }
 
+.dialog-label input::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0);
+}
+
+.dialog-label input::-moz-placeholder {
+  color: rgba(0, 0, 0, 0);
+}
+
+.dialog-label input::placeholder {
+  color: rgba(0, 0, 0, 0);
+}
+
 .dialog-label__text {
   position: absolute;
   inset-block-start: 50%;
@@ -1314,6 +1326,13 @@ html:not(.scrolled) .up {
 .dialog-label__text mark {
   color: #d72034;
   background: none;
+}
+
+input.has-value ~ .dialog-label__text {
+  inset-block-start: -14px;
+  font-size: 14px;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
 }
 
 input:focus ~ .dialog-label__text {

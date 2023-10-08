@@ -1178,7 +1178,18 @@ class Dialogs {
 
 const dialogs_dialogs = new Dialogs();
 
+;// CONCATENATED MODULE: ./src/js/scripts/scripts/dialog-form.js
+/** @type {NodeListOf<HTMLInputElement>} */
+const dialogInputs = document.querySelectorAll(".dialog-label input");
+
+dialogInputs?.forEach(input => {
+  input.addEventListener("input", () => {
+    input.classList.toggle("has-value", input.value.trim());
+  });
+});
+
 ;// CONCATENATED MODULE: ./src/js/scripts/scripts.js
+
 
 
 
