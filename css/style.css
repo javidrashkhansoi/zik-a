@@ -1248,10 +1248,6 @@ html:not(.scrolled) .up {
   --title-h2-mb: 70px;
 }
 
-.contracts__table {
-  overflow: auto;
-}
-
 .contracts-table {
   inline-size: 100%;
   line-height: 1.2;
@@ -1263,6 +1259,11 @@ html:not(.scrolled) .up {
 .contracts-table__body .contracts-table__row {
   transition-property: background-color;
   transition-duration: 0.3s;
+}
+
+.contracts-table__body .contracts-table__row:hover .contracts-link__info {
+  opacity: 1;
+  visibility: inherit;
 }
 
 .contracts-table__title {
@@ -1305,8 +1306,46 @@ html:not(.scrolled) .up {
 }
 
 .contracts-link__icon {
+  position: relative;
   flex: 0 0 auto;
-  font-size: 0;
+}
+
+.contracts-link__info {
+  position: absolute;
+  inset-block-end: calc(100% + 13px);
+  z-index: 1;
+  inline-size: -webkit-max-content;
+  inline-size: -moz-max-content;
+  inline-size: max-content;
+  max-inline-size: 205px;
+  padding-block: 20px;
+  padding-inline: 10px;
+  font-size: 12px;
+  text-align: center;
+  color: #000;
+  background-color: #fff;
+  -webkit-filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.1));
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition-property: opacity, visibility;
+  transition-duration: 0.3s;
+  pointer-events: none;
+}
+
+.contracts-link__info::after {
+  content: "";
+  position: absolute;
+  inset-block-start: calc(100% - 4px);
+  -webkit-border-before: 7px solid #fff;
+  border-block-start: 7px solid #fff;
+  -webkit-border-after: 7px solid rgba(255, 255, 255, 0);
+  border-block-end: 7px solid rgba(255, 255, 255, 0);
+  -webkit-border-start: 7px solid rgba(255, 255, 255, 0);
+  border-inline-start: 7px solid rgba(255, 255, 255, 0);
+  -webkit-border-end: 7px solid #fff;
+  border-inline-end: 7px solid #fff;
 }
 
 .dialog__inner {
@@ -1608,6 +1647,21 @@ input:not(:checked) ~ .dialog-checkbox__icon svg {
 
   .advantages__caption--hide-pc {
     display: none;
+  }
+
+  .contracts-link__info {
+    inset-inline-start: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+
+  .contracts-link__info::after {
+    inset-inline-start: 50%;
+    -webkit-border-before: 14px solid #fff;
+    border-block-start: 14px solid #fff;
+    border-inline: 7px solid rgba(255, 255, 255, 0);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
   }
 }
 
@@ -2319,6 +2373,15 @@ input:not(:checked) ~ .dialog-checkbox__icon svg {
 
   .advantages__caption--hide-tablet {
     display: none;
+  }
+
+  .contracts-link__info {
+    inset-inline-end: 7px;
+    border-end-end-radius: 0;
+  }
+
+  .contracts-link__info::after {
+    inset-inline-end: 0;
   }
 }
 
